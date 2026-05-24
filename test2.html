@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open sesame</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Click the yellow heart please </h1>
+        
+        <div class="gift-box" id="giftBox">
+            <img src="heart.png" alt="Gift" id="giftImage" width="220">
+            <span class="tap-text">Tap me</span>
+        </div>
+    </div>
+
+    
+    <div class="letter-overlay" id="letterOverlay">
+        <div class="letter">
+            <i class="fa-solid fa-xmark close-btn" id="closeBtn"></i>
+            
+            <div class="letter-header">
+                <img src="love.png" alt="Love" class="stamp">
+                <h2>Happy 19th Birthday baby! 
+🎂
+💛💛</h2>
+            </div>
+
+            <div class="letter-body" contenteditable="true" id="letterText">
+                Happy birthday baby! Enjoy your day and wish ko lahat ng mga pangarap mo matupad mo, and also mas maging healthy ka pa. 
+                Bawas bawasan din ang stress at pagiging busit HEHEEHEHHEHE I LOVE YOUUUU SO MUCH ENJOY YOUR DAY!
+
+                 
+            </div>
+
+            <div class="letter-photo">
+               <img src="67.png" alt="Us" width="150" height="150" style="object-fit: cover;">
+            </div>
+            
+
+            <div class="letter-footer">
+                <img src="smiley_icon.png" alt="Smiley" class="smiley">
+                <button id="saveBtn">Save Letter</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const giftBox = document.getElementById('giftBox');
+        const letterOverlay = document.getElementById('letterOverlay');
+        const closeBtn = document.getElementById('closeBtn');
+        const letterText = document.getElementById('letterText');
+        const saveBtn = document.getElementById('saveBtn');
+
+        // Load saved text if it exists
+        const savedText = localStorage.getItem('rhiLetterText');
+        if(savedText) {
+            letterText.innerHTML = savedText;
+        }
+
+        // Open letter
+        giftBox.addEventListener('click', () => {
+            letterOverlay.classList.add('active');
+            giftBox.classList.add('opened');
+        });
+
+        // Close letter
+        closeBtn.addEventListener('click', () => {
+            letterOverlay.classList.remove('active');
+        });
+
+        // Close when clicking outside letter
+        letterOverlay.addEventListener('click', (e) => {
+            if(e.target === letterOverlay) {
+                letterOverlay.classList.remove('active');
+            }
+        });
+
+        // Save button
+        saveBtn.addEventListener('click', () => {
+            localStorage.setItem('rhiLetterText', letterText.innerHTML);
+            saveBtn.textContent = 'Saved! 💾';
+            setTimeout(() => {
+                saveBtn.textContent = 'Save Letter';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
